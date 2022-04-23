@@ -10,24 +10,8 @@ const userSchema = new mongoose.Schema({
     type: String,
     minlength: 2,
     maxlength: 30,
-    default: 'Абгарян Арсен',
+    required: true,
   },
-
-  // about: {
-  //   type: String,
-  //   minlength: 2,
-  //   maxlength: 30,
-  //   default: 'Начинающий Веб-разработчик',
-  // },
-
-  // avatar: {
-  //   type: String,
-  //   default: 'https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png',
-  //   validate: {
-  //     validator: (url) => isUrl(url),
-  //     message: 'Неверная ссылка',
-  //   },
-  // },
 
   email: {
     type: String,

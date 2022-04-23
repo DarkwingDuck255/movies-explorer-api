@@ -9,9 +9,10 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const routes = require('./routes');
 const errorHandler = require('./utils/error-handler');
 const NotFound = require('./utils/not-found');
-const { login, postUser } = require('./controllers/users');
+// const { login, postUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
-const { signupValidity, loginValidity } = require('./middlewares/validation');
+// const { signupValidity, loginValidity } = require('./middlewares/validation');
+const router = require('./routes/regAndLogin');
 
 const { PORT = 3000 } = process.env;
 const app = express();
@@ -31,8 +32,7 @@ app.get('/crash-test', () => {
 
 app.use(requestLogger);
 
-app.post('/signin', loginValidity, login);
-app.post('/signup', signupValidity, postUser);
+app.use(router);
 
 app.use(auth);
 

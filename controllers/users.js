@@ -8,27 +8,6 @@ const EmailRegErr = require('../utils/email-reg-err');
 const SigninErr = require('../utils/signin-err');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
-// const getUsers = (req, res, next) => {
-//   const usersArray = {};
-
-//   return users.find(usersArray)
-//     .then((result) => res.status(200).send(result))
-//     .catch(next);
-// };
-
-// const getUser = (req, res, next) => {
-//   const { id } = req.params;
-//   return users.findById(id)
-//     .orFail(new NotFound('Пользователь не найден'))
-//     .then((result) => res.status(200).send(result))
-//     .catch((err) => {
-//       if (err.name === 'CastError') {
-//         next(new BadRequest('Передан невалидный id'));
-//       } else {
-//         next(err);
-//       }
-//     });
-// };
 
 const getCurrentUser = (req, res, next) => users.findById(req.user._id)
   .orFail(new NotFound('Пользователь не найден'))
@@ -78,20 +57,6 @@ const patchUser = (req, res, next) => {
       }
     });
 };
-
-// const patchUserAvatar = (req, res, next) => {
-//   const { avatar } = req.body;
-//   return users.findByIdAndUpdate(req.user._id, { avatar }, { new: true, runValidators: true })
-//     .orFail(new NotFound('Пользователь не найден'))
-//     .then((result) => res.status(200).send(result))
-//     .catch((err) => {
-//       if (err.name === 'ValidationError') {
-//         next(new BadRequest('Переданы некорректные данные при изменении пользователя'));
-//       } else {
-//         next(err);
-//       }
-//     });
-// };
 
 const login = (req, res, next) => {
   const { email, password } = req.body;

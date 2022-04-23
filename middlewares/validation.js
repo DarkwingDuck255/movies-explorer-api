@@ -25,12 +25,6 @@ const aboutUserValidity = celebrate({
   }),
 });
 
-// const avatarLinkValidity = celebrate({
-//   body: Joi.object().keys({
-//     avatar: Joi.string().required().pattern(linkAddress),
-//   }),
-// });
-
 const moviesValididty = celebrate({
   body: Joi.object().keys({
     nameRU: Joi.string().required(),
@@ -43,6 +37,7 @@ const moviesValididty = celebrate({
     duration: Joi.number().required(),
     director: Joi.string().required(),
     country: Joi.string().required(),
+    movieId: Joi.number().required(),
   }),
 });
 

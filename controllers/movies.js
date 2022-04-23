@@ -14,6 +14,7 @@ const getMovies = (req, res, next) => {
 const postMovie = (req, res, next) => {
   const {
     nameRU, nameEN, thumbnail, trailerLink, image, description, year, duration, director, country,
+    movieId,
   } = req.body;
   const owner = req.user._id;
 
@@ -29,6 +30,7 @@ const postMovie = (req, res, next) => {
     director,
     country,
     owner,
+    movieId,
   })
     .then((result) => res.status(200).send(result))
     .catch((err) => {
@@ -47,44 +49,13 @@ const deleteMovie = (req, res, next) => {
     .orFail(new NotFound('Карточка в базе не найдена'))
     .then((card) => {
       if (!card.owner.equals(req.user._id)) {
-        return next(new AccessDenied('не удааляй фильм чужой!'));
+        return next(new AccessDenied('не удаляй фильм чужой!'));
       }
       return card.remove()
         .then(() => res.status(200).send({ message: 'Твой фильм удален, холоп))' }));
     })
     .catch(next);
 };
-
-// const putCardLike = (req, res, next) => {
-//   const { id } = req.params;
-
-// eslint-disable-next-line max-len
-//   return movie.findOneAndUpdate({ _id: id }, { $addToSet: { likes: req.user._id } }, { new: true })
-//     .orFail(new NotFound('Передан несуществующий _id карточки.'))
-//     .then((result) => res.status(200).send(result))
-//     .catch((err) => {
-//       if (err.name === 'CastError') {
-//         next(new BadRequest('Переданы некорректные данные для постановки/снятиия лайка'));
-//       } else {
-//         next(err);
-//       }
-//     });
-// };
-
-// const deleteCardLike = (req, res, next) => {
-//   const { id } = req.params;
-
-//   return movie.findOneAndUpdate({ _id: id }, { $pull: { likes: req.user._id } }, { new: true })
-//     .orFail(new NotFound('Передан несуществующий _id карточки.'))
-//     .then((result) => res.status(200).send(result))
-//     .catch((err) => {
-//       if (err.name === 'CastError') {
-//         next(new BadRequest('Переданы некорректные данные для постановки/снятиия лайка'));
-//       } else {
-//         next(err);
-//       }
-//     });
-// };
 
 module.exports = {
   getMovies, postMovie, deleteMovie,
