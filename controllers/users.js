@@ -13,11 +13,7 @@ const getCurrentUser = (req, res, next) => users.findById(req.user._id)
   .orFail(new NotFound('Пользователь не найден'))
   .then((user) => res.status(200).send({ user }))
   .catch((err) => {
-    if (err.name === 'ValidationError') {
-      next(new BadRequest('Переданы некорректные данные при создании пользователя'));
-    } else {
-      next(err);
-    }
+    next(err);
   });
 
 const postUser = (req, res, next) => {
