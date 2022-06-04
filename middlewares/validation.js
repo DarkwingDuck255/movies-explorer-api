@@ -21,7 +21,7 @@ const aboutUserValidity = celebrate({
   body: Joi.object().keys({
     name: Joi.string().required(),
     email: Joi.string().required().email(),
-    password: Joi.string().required(),
+    // password: Joi.string().required(),
   }),
 });
 
@@ -42,8 +42,8 @@ const moviesValididty = celebrate({
 });
 
 const idValidity = celebrate({
-  params: Joi.object().keys({
-    id: Joi.string().length(24).hex().required(),
+  params: Joi.object({
+    _id: Joi.string().length(24).hex().required(),
   }),
 });
 
