@@ -4,7 +4,7 @@ const allowedCors = [
   'http://api.darkwingduck.nomoredomains.xyz',
   'https://darkwingduck.nomoredomains.work',
   'http://darkwingduck.nomoredomains.work',
-  'http://localhost:3001',
+  // 'http://localhost:3001',
 ];
 
 const cors = (req, res, next) => {
