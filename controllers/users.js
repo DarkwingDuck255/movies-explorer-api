@@ -38,9 +38,9 @@ const postUser = (req, res, next) => {
 };
 
 const patchUser = (req, res, next) => {
-  const { name, about } = req.body;
+  const { name, email } = req.body;
 
-  return users.findByIdAndUpdate(req.user._id, { name, about }, { new: true, runValidators: true })
+  return users.findByIdAndUpdate(req.user._id, { name, email }, { new: true, runValidators: true })
     .orFail(new NotFound('Пользователь не найден'))
     .then((user) => res.status(200).send(user))
     .catch((err) => {

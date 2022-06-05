@@ -43,9 +43,9 @@ const postMovie = (req, res, next) => {
 };
 
 const deleteMovie = (req, res, next) => {
-  const { id } = req.params;
+  const { _id } = req.params;
 
-  return movie.findById(id)
+  return movie.findById(_id)
     .orFail(new NotFound('Карточка в базе не найдена'))
     .then((card) => {
       if (!card.owner.equals(req.user._id)) {
